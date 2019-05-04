@@ -1,0 +1,54 @@
+<div class="container-form">
+  <mat-card>
+    <form [formGroup]="vagaForm" (ngSubmit)="salvarVaga()">
+      <div class="example-container">
+        <div flLayout="column" fxLayoutGap="7px" fxLayoutGap.xs="0px">
+          <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.8%" fxLayoutGap.sm="0px">
+            <mat-form-field fxFlex="10%">
+              <input matInput placeholder="Codigo" formControlName="id" type="number">
+            </mat-form-field>
+
+          </div>
+          <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.8%" fxLayoutGap.sm="0px">
+            <mat-form-field fxFlex="20%">
+              <input matInput placeholder="Empresa" formControlName="empresa">
+            </mat-form-field>
+            <mat-form-field fxFlex="80%">
+              <input matInput placeholder="Nome" formControlName="nome">
+            </mat-form-field>
+          </div>
+          <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.8%" fxLayoutGap.sm="0px">
+            <mat-form-field fxFlex="30%">
+              <mat-select placeholder="Periodo" formControlName="periodo">
+                <mat-option value="Manhã">Manhã</mat-option>
+                <mat-option value="Tarde">Tarde</mat-option>
+                <mat-option value="Noite">Noite</mat-option>
+                <mat-option value="Integral">Integral</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field fxFlex="50%">
+              <input matInput placeholder="Cidade" formControlName="cidade">
+            </mat-form-field>
+            <mat-form-field fxFlex="20%">
+              <input matInput placeholder="Estado" formControlName="estado">
+            </mat-form-field>
+          </div>
+          <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.8%" fxLayoutGap.sm="0px">
+            <mat-form-field fxFlex="100%">
+              <textarea matInput placeholder="Descrição" formControlName="descricao"></textarea>
+            </mat-form-field>
+          </div>
+          <mat-form-field>
+            <input matInput type="date" placeholder="Data" formControlName="data">
+          </mat-form-field>
+          <div class="button-row">
+            <button type="submit" mat-raised-button color="primary">Salvar</button>
+            <button type="reset" mat-raised-button color="warn">Cancelar</button>
+            <button mat-raised-button (click)="voltar()">Voltar</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </mat-card>
+  <app-testes-lista [testes]="vagaTestes"></app-testes-lista>
+</div>
