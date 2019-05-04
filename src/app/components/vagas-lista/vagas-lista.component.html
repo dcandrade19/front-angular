@@ -1,0 +1,24 @@
+<div class="container">
+<ul>
+  <li  *ngFor="let vaga of vagas | async">
+      <mat-card class="card-vaga"  [routerLink]="['/vaga/', vaga.id]">
+          <mat-card-title>
+            {{vaga.nome}}
+            <span></span>
+          </mat-card-title>
+          <mat-card-subtitle>vaga.subtitulo?</mat-card-subtitle>
+          <mat-card-content>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              </p>
+          </mat-card-content>
+
+        <div class="rodape-info">
+          <span><mat-icon>room</mat-icon>Localização - PR</span> |
+          <span><mat-icon>alarm</mat-icon>data</span> |
+          <span><mat-icon>work</mat-icon>periodo</span>
+        </div>
+        </mat-card>
+  </li>
+</ul>
+</div>

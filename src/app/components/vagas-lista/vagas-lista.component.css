@@ -1,0 +1,25 @@
+ul {
+  padding: 0;
+}
+li {
+  list-style: none;
+}
+.right {
+  text-align: right;
+}
+.card-vaga {
+  cursor: pointer;
+  margin-top:10px;
+  transition:  0.5s box-shadow;
+}
+.card-vaga:hover {
+  box-shadow: 0 0 0 2px #3f51b5;
+}
+.rodape-info{
+  color: rgba(0,0,0,.54);
+  font-size: 14px;
+}
+.rodape-info .mat-icon {
+  font-size: 20px;
+  vertical-align: middle;
+}
