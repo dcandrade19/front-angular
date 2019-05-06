@@ -1,7 +1,7 @@
 import { VagaService } from './../../services/vaga.service';
 import { Vaga } from '../../models/Vaga';
 import { Teste } from '../../models/Teste';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
