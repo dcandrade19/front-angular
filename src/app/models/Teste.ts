@@ -9,9 +9,9 @@ export class Teste implements Deserializable {
   deserialize(input: any): this {
 
     Object.assign(this, input);
-
+    if (this.questoes) {
     this.questoes = input.questoes.map(questao => new Questao().deserialize(questao));
-
+    }
     return this;
   }
 }

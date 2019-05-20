@@ -1,37 +1,41 @@
 <div class="container">
-    <a mat-raised-button color="primary" routerLink="/teste">Adicionar Teste</a>
-    <ul>
-      <li *ngFor="let teste of testes | async">
-        <mat-card class="card-vaga">
-          <mat-card-title>
-            {{teste.titulo}}
-            <span></span>
-          </mat-card-title>
-          <mat-card-subtitle>teste.empresa</mat-card-subtitle>
-          <mat-card-content>
-            <p>
-              teste.descricao
-            </p>
-          </mat-card-content>
-          <div class="rodape" fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.8%" fxLayoutGap.sm="0px">
-            <div class="rodape-esquerda" fxFlex="80%">
-              <span>
-                <mat-icon>room</mat-icon>vaga.cidade - vaga.estado
-              </span> |
-              <span>
-                <mat-icon>alarm</mat-icon>vaga.data | date 
-              </span> |
-              <span>
-                <mat-icon>work</mat-icon>vaga.periodo
-              </span>
+    <mat-accordion>
+    <mat-expansion-panel (opened)="exibir = true" (closed)="exibir = false">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Novo teste
+          </mat-panel-title>
+          <mat-panel-description>
+            adicionar teste
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+    <app-teste-form></app-teste-form>
+    </mat-expansion-panel>
+  <ul>
+    <li *ngFor="let teste of testes">
+      <mat-card class="card">
+        <mat-card-title>
+          {{teste.titulo}}
+          <span></span>
+        </mat-card-title>
+        <div class="rodape" fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.8%" fxLayoutGap.sm="0px">
+          <div class="button-row">
+              <button mat-raised-button color="warn" (click)="deletarTeste(teste.id)">Deletar</button>
             </div>
-            <div class="button-row">
-              <button type="submit" mat-raised-button color="primary"
-                [routerLink]="['/teste/', teste.id]">Ver/Editar</button>
-              <button mat-raised-button color="warn">Deletar</button>
-            </div>
-          </div>
-        </mat-card>
-      </li>
-    </ul>
-  </div>  
+        </div>
+        <mat-expansion-panel (opened)="exibir = true" (closed)="exibir = false">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Detalhes / Editar
+              </mat-panel-title>
+              <mat-panel-description>
+                ver detalhes
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <app-teste-form [teste]="this.teste"></app-teste-form>
+          </mat-expansion-panel>
+      </mat-card>
+    </li>
+  </ul>
+  </mat-accordion>
+</div>

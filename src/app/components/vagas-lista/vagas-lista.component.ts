@@ -14,21 +14,22 @@ export class VagasListaComponent implements OnInit {
   public vagas: Observable<Vaga[]>;
 
   constructor(
-    private vagaService: VagaService
+    private vagaService: VagaService,
+    private router: Router
   ) {
   }
 
   ngOnInit() {
+
+    this.vagaService.Refresh.subscribe((data) => {
+      this.vagas = this.vagaService.listar();
+
+    });
     this.vagas = this.vagaService.listar();
   }
 
   deletarVaga(id: number | string): void {
-    this.vagaService.deletar(id).subscribe(data => {
-      if (data.id > 0) {
-        this.vagas = this.vagaService.listar();
-      }
-    }
-    );
+    this.vagaService.deletar(id).subscribe();
   }
 
 }

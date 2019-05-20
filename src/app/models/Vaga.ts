@@ -3,22 +3,22 @@ import { Deserializable } from './Deserializable';
 
 
 export class Vaga implements Deserializable {
-    public id: number;
-    public nome: string;
-    public empresa: string;
-    public descricao: string;
-    public cidade: string;
-    public estado: string;
-    public data: Date;
-    public periodo: string;
-    public testes: Teste[];
+  public id: number;
+  public nome: string;
+  public empresa: string;
+  public descricao: string;
+  public cidade: string;
+  public estado: string;
+  public data: Date;
+  public periodo: string;
+  public testes: Teste[];
 
-    deserialize(input: any): this {
+  deserialize(input: any): this {
 
-      Object.assign(this, input);
-
+    Object.assign(this, input);
+    if (this.testes) {
       this.testes = input.testes.map(teste => new Teste().deserialize(teste));
-
-      return this;
     }
+    return this;
+  }
 }

@@ -20,4 +20,8 @@ export class TestesListaComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  deletarTeste(id: number | string): void {
+    this.testeService.deletar(id).subscribe();
+  }
 }

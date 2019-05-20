@@ -53,6 +53,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { TestesListaComponent } from './components/testes-lista/testes-lista.component';
 import { registerLocaleData, DatePipe } from '@angular/common';
 import localeBr from '@angular/common/locales/pt';
+import { TesteFormComponent } from './components/teste-form/teste-form.component';
 
 registerLocaleData(localeBr, 'pt');
 
@@ -62,7 +63,8 @@ registerLocaleData(localeBr, 'pt');
     VagasListaComponent,
     NavtabComponent,
     TestesListaComponent,
-    VagaFormComponent
+    VagaFormComponent,
+    TesteFormComponent
   ],
   imports: [
   AppRoutingModule,

@@ -1,0 +1,21 @@
+<div class="container-form">
+  <mat-card>
+    <form [formGroup]="testeForm" (ngSubmit)="salvarTeste()">
+      <div class="example-container">
+        <div flLayout="column" fxLayoutGap="7px" fxLayoutGap.xs="0px">
+          <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.8%" fxLayoutGap.sm="0px">
+            <mat-form-field fxFlex="10%">
+              <input matInput placeholder="Codigo" formControlName="id" type="number">
+            </mat-form-field>
+            <mat-form-field fxFlex="80%">
+              <input matInput placeholder="Titulo" formControlName="titulo">
+            </mat-form-field>
+          </div>
+          <div class="button-row">
+            <button type="submit" mat-raised-button color="primary">Salvar</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </mat-card>
+</div>

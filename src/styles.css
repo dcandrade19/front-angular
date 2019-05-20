@@ -11,7 +11,7 @@ body {
   padding: 2% 10%;
 }
 .container-form {
-  padding: 2% 20%;
+  padding: 2% 10%;
 }
 .button-row {
   text-align: right;
@@ -19,4 +19,8 @@ body {
 .button-row button,
 .button-row a {
   margin-left: 8px;
+}
+.card {
+  margin-top:5px;
+  margin-bottom:5px;
 }

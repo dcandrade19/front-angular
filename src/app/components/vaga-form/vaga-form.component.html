@@ -1,54 +1,73 @@
-<div class="container-form">
-  <mat-card>
-    <form [formGroup]="vagaForm" (ngSubmit)="salvarVaga()">
-      <div class="example-container">
-        <div flLayout="column" fxLayoutGap="7px" fxLayoutGap.xs="0px">
-          <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.8%" fxLayoutGap.sm="0px">
-            <mat-form-field fxFlex="10%">
-              <input matInput placeholder="Codigo" formControlName="id" type="number">
-            </mat-form-field>
-
-          </div>
-          <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.8%" fxLayoutGap.sm="0px">
-            <mat-form-field fxFlex="20%">
-              <input matInput placeholder="Empresa" formControlName="empresa">
-            </mat-form-field>
-            <mat-form-field fxFlex="80%">
-              <input matInput placeholder="Nome" formControlName="nome">
-            </mat-form-field>
-          </div>
-          <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.8%" fxLayoutGap.sm="0px">
-            <mat-form-field fxFlex="30%">
-              <mat-select placeholder="Periodo" formControlName="periodo">
-                <mat-option value="Manhã">Manhã</mat-option>
-                <mat-option value="Tarde">Tarde</mat-option>
-                <mat-option value="Noite">Noite</mat-option>
-                <mat-option value="Integral">Integral</mat-option>
-              </mat-select>
-            </mat-form-field>
-            <mat-form-field fxFlex="50%">
-              <input matInput placeholder="Cidade" formControlName="cidade">
-            </mat-form-field>
-            <mat-form-field fxFlex="20%">
-              <input matInput placeholder="Estado" formControlName="estado">
-            </mat-form-field>
-          </div>
-          <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.8%" fxLayoutGap.sm="0px">
-            <mat-form-field fxFlex="100%">
-              <textarea matInput placeholder="Descrição" formControlName="descricao"></textarea>
-            </mat-form-field>
-          </div>
-          <mat-form-field>
-            <input matInput type="date" placeholder="Data" formControlName="data">
+<mat-card>
+  <form [formGroup]="vagaForm" (ngSubmit)="salvarVaga()">
+    <div class="example-container">
+      <div flLayout="column" fxLayoutGap="7px" fxLayoutGap.xs="0px">
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.8%" fxLayoutGap.sm="0px">
+          <mat-form-field fxFlex="10%">
+            <input matInput placeholder="Codigo" formControlName="id" type="number">
           </mat-form-field>
-          <div class="button-row">
-            <button type="submit" mat-raised-button color="primary">Salvar</button>
-            <button type="reset" mat-raised-button color="warn">Cancelar</button>
-            <button mat-raised-button (click)="voltar()">Voltar</button>
-          </div>
+        </div>
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.8%" fxLayoutGap.sm="0px">
+          <mat-form-field fxFlex="20%">
+            <input matInput placeholder="Empresa" formControlName="empresa">
+          </mat-form-field>
+          <mat-form-field fxFlex="80%">
+            <input matInput placeholder="Nome" formControlName="nome">
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.8%" fxLayoutGap.sm="0px">
+          <mat-form-field fxFlex="30%">
+            <mat-select placeholder="Periodo" formControlName="periodo">
+              <mat-option value="Manhã">Manhã</mat-option>
+              <mat-option value="Tarde">Tarde</mat-option>
+              <mat-option value="Noite">Noite</mat-option>
+              <mat-option value="Integral">Integral</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field fxFlex="50%">
+            <input matInput placeholder="Cidade" formControlName="cidade">
+          </mat-form-field>
+          <mat-form-field fxFlex="20%">
+            <input matInput placeholder="Estado" formControlName="estado">
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.8%" fxLayoutGap.sm="0px">
+          <mat-form-field fxFlex="100%">
+            <textarea matInput placeholder="Descrição" formControlName="descricao"></textarea>
+          </mat-form-field>
+        </div>
+        <mat-form-field>
+          <input matInput type="date" placeholder="Data" formControlName="data">
+        </mat-form-field>
+        <a mat-raised-button (click)="addTeste()" color="primary">Teste</a>
+        <div formArrayName="testes" *ngFor="let teste of vagaForm.get('testes').controls; let i = index;">
+          <mat-horizontal-stepper #stepper>
+            <mat-step [stepControl]="i">
+              <div [formGroupName]="i" fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.8%" fxLayoutGap.sm="0px">
+                <mat-form-field fxFlex="20%">
+                  <input matInput placeholder="Id" formControlName="id" type="number">
+                </mat-form-field>
+                <mat-form-field fxFlex="80%">
+                  <input matInput placeholder="Titulo" formControlName="titulo">
+                </mat-form-field>
+                <mat-toolbar>
+                  <mat-toolbar-row>
+                    <span class="example-spacer"></span>
+                    <a mat-mini-fab color="warn" (click)="removerTeste(i)"><mat-icon class="example-icon" aria-hidden="false" aria-label="Example delete icon">delete
+                    </mat-icon></a>
+                  </mat-toolbar-row>
+                </mat-toolbar>
+              </div>
+            </mat-step>
+            <mat-step [stepControl]="i">
+              sdsd
+            </mat-step>
+          </mat-horizontal-stepper>
         </div>
       </div>
-    </form>
-  </mat-card>
-  <app-testes-lista [testes]="vagaTestes"></app-testes-lista>
-</div>
+      <div class="button-row">
+        <button type="submit" mat-raised-button color="primary">Salvar</button>
+      </div>
+    </div>
+  </form>
+</mat-card>
