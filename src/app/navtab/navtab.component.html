@@ -1,0 +1,18 @@
+<div>
+  <mat-sidenav-container class="sidebar-container">
+    <mat-sidenav mode="side" [opened]="opened" fixedInViewport="Fixed">
+      <mat-nav-list>
+        <div class="titulo-div">
+          <h1 class="app-name">Projeto Vagas</h1>
+        </div>
+        <a  mat-list-item routerLink="/vagas" routerLinkActive="active"><mat-icon>list</mat-icon> Vagas</a>
+        <a  mat-list-item routerLink="/nova" routerLinkActive="active"><mat-icon>add</mat-icon> Adicionar Vaga</a>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <mat-icon class="btn-open" (click)="opened = !opened">{{opened ? 'arrow_back_ios' : 'arrow_forward_ios'}}
+      </mat-icon>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

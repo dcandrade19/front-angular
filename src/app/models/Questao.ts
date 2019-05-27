@@ -2,8 +2,9 @@ import { Deserializable } from './Deserializable';
 import { Resposta } from './Resposta';
 
 export class Questao implements Deserializable{
-  public descricao: string;
-  public respostas: Resposta[];
+  public id: number =0;
+  public descricao: string ="sadasdsa";
+  public respostas: Resposta[] = [];
 
   deserialize(input: any): this {
 

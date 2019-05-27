@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { VagasListaComponent } from './vagas-lista.component';
+import { VagaListaComponent } from './vaga-lista.component';
 
-describe('VagasListaComponent', () => {
-  let component: VagasListaComponent;
-  let fixture: ComponentFixture<VagasListaComponent>;
+describe('VagaListaComponent', () => {
+  let component: VagaListaComponent;
+  let fixture: ComponentFixture<VagaListaComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ VagasListaComponent ]
+      declarations: [ VagaListaComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(VagasListaComponent);
+    fixture = TestBed.createComponent(VagaListaComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

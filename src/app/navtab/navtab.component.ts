@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavtabComponent implements OnInit {
 
+  opened: boolean = true;
+
   constructor() { }
 
   ngOnInit() {

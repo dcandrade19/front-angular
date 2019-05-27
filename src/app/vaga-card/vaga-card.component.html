@@ -1,0 +1,36 @@
+<mat-card class="card">
+  <div class="btn-opc">
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="editarVaga(vaga.id)">
+            <mat-icon>edit</mat-icon>
+            <span>Editar</span>
+          </button>
+      <button mat-menu-item (click)="deletarVaga(vaga.id)">
+        <mat-icon>delete</mat-icon>
+        <span>Deletar</span>
+      </button>
+    </mat-menu>
+  </div>
+  <mat-card-title>
+    {{vaga.nome}}
+    <span></span>
+  </mat-card-title>
+  <mat-card-subtitle>{{vaga.empresa}}</mat-card-subtitle>
+  <mat-card-content>
+    <p>
+      {{vaga.descricao}}
+    </p>
+  </mat-card-content>
+  <div class="rodape" fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.8%" fxLayoutGap.sm="0px">
+    <div class="textos-rodape" fxFlex="80%">
+      <mat-icon>room</mat-icon>{{vaga.cidade}} - {{vaga.estado}}
+      |
+      <mat-icon>alarm</mat-icon>{{vaga.data | date }}
+      |
+      <mat-icon>work</mat-icon>{{vaga.periodo}}
+    </div>
+  </div>
+</mat-card>

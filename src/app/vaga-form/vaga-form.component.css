@@ -1,0 +1,14 @@
+.card {
+  border-left: 4px solid #24AB4C;
+  margin: 25px;
+}
+.btn-opc {
+  position: absolute;
+  right: 0;
+  margin: -12px 34px 0px 0;
+}
+
+.btn-opc .mat-icon-button {
+  width: 0;
+  height: 0;
+}

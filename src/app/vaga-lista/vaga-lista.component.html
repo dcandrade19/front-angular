@@ -1,0 +1,6 @@
+<h1 class="component-title">Vagas</h1>
+<ul>
+  <li *ngFor="let vaga of vagas | async">
+    <app-vaga-card [vaga]="vaga"></app-vaga-card>
+  </li>
+</ul>

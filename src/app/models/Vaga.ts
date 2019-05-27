@@ -11,7 +11,7 @@ export class Vaga implements Deserializable {
   public estado: string;
   public data: Date;
   public periodo: string;
-  public testes: Teste[];
+  public testes: Teste[] = [];
 
   deserialize(input: any): this {
 

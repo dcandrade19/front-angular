@@ -1,0 +1,148 @@
+
+<h1 class="component-title">Adicionar Vaga</h1>
+<form [formGroup]="vagas" (ngSubmit)="salvarVaga()">
+
+
+  <mat-card class="card">
+    <div class="example-container">
+      <div flLayout="column" fxLayoutGap="7px" fxLayoutGap.xs="0px">
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.8%" fxLayoutGap.sm="0px">
+          <mat-form-field fxFlex="10%">
+            <input matInput placeholder="Codigo" formControlName="id" type="number">
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.8%" fxLayoutGap.sm="0px">
+          <mat-form-field fxFlex="20%">
+            <input matInput placeholder="Empresa" formControlName="empresa">
+          </mat-form-field>
+          <mat-form-field fxFlex="80%">
+            <input matInput placeholder="Nome" formControlName="nome">
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.8%" fxLayoutGap.sm="0px">
+          <mat-form-field fxFlex="30%">
+            <mat-select placeholder="Periodo" formControlName="periodo">
+              <mat-option value="Manhã">Manhã</mat-option>
+              <mat-option value="Tarde">Tarde</mat-option>
+              <mat-option value="Noite">Noite</mat-option>
+              <mat-option value="Integral">Integral</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field fxFlex="50%">
+            <input matInput placeholder="Cidade" formControlName="cidade">
+          </mat-form-field>
+          <mat-form-field fxFlex="20%">
+            <input matInput placeholder="Estado" formControlName="estado">
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.8%" fxLayoutGap.sm="0px">
+          <mat-form-field fxFlex="100%">
+            <textarea matInput placeholder="Descrição" formControlName="descricao"></textarea>
+          </mat-form-field>
+        </div>
+        <mat-form-field>
+          <input matInput type="date" placeholder="Data" formControlName="data">
+        </mat-form-field>
+
+      </div>
+    </div>
+  </mat-card>
+
+
+  <a mat-menu-item (click)="addTeste()">
+    <mat-icon>add</mat-icon>
+    <span>Adicionar Teste</span>
+  </a>
+
+  <div formArrayName="testes">
+    <div *ngFor="let teste of getTestes(vagas); let i = index;">
+
+      <div [formGroupName]="i">
+
+        <h2 class="component-title">Teste - {{i+1}}</h2>
+        <mat-card class="card" [id]="teste + i">
+          <div class="btn-opc">
+            <a mat-icon-button [matMenuTriggerFor]="menu">
+              <mat-icon>more_vert</mat-icon>
+            </a>
+            <mat-menu #menu="matMenu">
+              <a mat-menu-item (click)="removerTestes(i)">
+                <mat-icon>delete</mat-icon>
+                <span>Deletar</span>
+              </a>
+            </mat-menu>
+          </div>
+          <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.8%" fxLayoutGap.sm="0px">
+            <mat-form-field fxFlex="10%">
+              <input matInput placeholder="Id" formControlName="id" type="number">
+            </mat-form-field>
+          </div>
+          <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.8%" fxLayoutGap.sm="0px">
+            <mat-form-field fxFlex="90%">
+              <input matInput placeholder="Titulo" formControlName="titulo">
+            </mat-form-field>
+          </div>
+        </mat-card>
+        <a mat-menu-item  (click)="addQuestao(i)">
+            <mat-icon>add</mat-icon>
+            <span>Adicionar Questão</span>
+          </a>
+        <div #fimteste formArrayName="questoes">
+          <div [formGroupName]="j" *ngFor="let questao of getQuestoes(teste); let j = index;">
+            <h3 class="component-title">Questão - {{j+1}}</h3>
+            <mat-card class="card">
+              <div class="btn-opc">
+                <a mat-icon-button [matMenuTriggerFor]="menu">
+                  <mat-icon>more_vert</mat-icon>
+                </a>
+                <mat-menu #menu="matMenu">
+                  <a mat-menu-item (click)="removerQuestoes(j)">
+                    <mat-icon>delete</mat-icon>
+                    <span>Deletar</span>
+                  </a>
+                </mat-menu>
+              </div>
+              <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.8%" fxLayoutGap.sm="0px">
+                <mat-form-field fxFlex="10%">
+                  <input matInput placeholder="Id" formControlName="id" type="number">
+                </mat-form-field>
+              </div>
+              <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.8%" fxLayoutGap.sm="0px">
+                <mat-form-field fxFlex="90%">
+                  <input matInput placeholder="Descricao" formControlName="descricao">
+                </mat-form-field>
+              </div>
+            </mat-card>
+            <div formArrayName="respostas">
+              <div [formGroupName]="l" *ngFor="let resposta of getRespostas(questao); let l = index;">
+                <h4 class="component-title">Resposta - {{l+1}}</h4>
+                <mat-card class="card">
+
+                  <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.8%" fxLayoutGap.sm="0px">
+                    <mat-form-field fxFlex="10%">
+                      <input matInput placeholder="Id" formControlName="id" type="number">
+                    </mat-form-field>
+                  </div>
+                  <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.8%" fxLayoutGap.sm="0px">
+                    <mat-form-field fxFlex="90%">
+                      <input matInput placeholder="Descricao" formControlName="descricao">
+                    </mat-form-field>
+                  </div>
+                  <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.8%" fxLayoutGap.sm="0px">
+                  <mat-checkbox labelPosition="before" formControlName="certa">Certa</mat-checkbox>
+                </div>
+                </mat-card>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <mat-divider></mat-divider>
+      </div>
+    </div>
+  </div>
+  <button mat-menu-item type="submit">
+      <mat-icon>save</mat-icon>
+      <span>Salvar Vaga</span>
+    </button>
+</form>

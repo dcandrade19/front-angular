@@ -1,26 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
 body {
+  font-family: 'Roboto', sans-serif;
   margin: 0;
-  background-color: #e7e7e7;
+  background: #FCFCFC;
 }
-.mat-app-background {
-  background-color: #e7e7e7;
-}
-.container {
-  padding: 2% 10%;
-}
-.container-form {
-  padding: 2% 10%;
-}
-.button-row {
-  text-align: right;
-}
-.button-row button,
-.button-row a {
-  margin-left: 8px;
-}
-.card {
-  margin-top:5px;
-  margin-bottom:5px;
+.component-title {
+  color: #222222;
+  border-left: 4px solid #24AB4C;
+  border-radius: 3px;
+  padding: 5px 10px;
 }
