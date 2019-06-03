@@ -2,7 +2,7 @@ import { Deserializable } from './Deserializable';
 import { Resposta } from './Resposta';
 
 export class Questao implements Deserializable{
-  public id: number =0;
+  public idQuestao: number =0;
   public descricao: string ="sadasdsa";
   public respostas: Resposta[] = [];
 

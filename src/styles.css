@@ -6,9 +6,29 @@ body {
   margin: 0;
   background: #FCFCFC;
 }
+
 .component-title {
   color: #222222;
   border-left: 4px solid #24AB4C;
   border-radius: 3px;
   padding: 5px 10px;
+}
+
+.card {
+  border-left: 4px solid #24AB4C;
+  margin: 25px;
+}
+
+app-alerta {
+  position: absolute;
+  z-index: 100;
+  width: auto;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+  transition: 0.3s all;
+}
+
+app-alerta:hover {
+  opacity: 0.3;
 }

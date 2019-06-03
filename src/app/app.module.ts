@@ -1,4 +1,3 @@
-import { QuestaoService } from './services/questao.service';
 import { VagaService } from './services/vaga.service';
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
@@ -46,15 +45,13 @@ import {
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NavtabComponent } from './navtab/navtab.component';
-import { TesteService } from './services/teste.service';
-import { RespostaService } from './services/resposta.service';
 import { VagaFormComponent } from './vaga-form/vaga-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { TestesListaComponent } from './components/testes-lista/testes-lista.component';
 import { registerLocaleData, DatePipe } from '@angular/common';
 import localeBr from '@angular/common/locales/pt';
-import { TesteFormComponent } from './components/teste-form/teste-form.component';
 import { VagaCardComponent } from './vaga-card/vaga-card.component';
+import { LoginFormComponent } from './login-form/login-form.component';
+import { AlertaComponent } from './alerta/alerta.component';
 
 registerLocaleData(localeBr, 'pt');
 
@@ -63,10 +60,10 @@ registerLocaleData(localeBr, 'pt');
     AppComponent,
     VagaListaComponent,
     NavtabComponent,
-    TestesListaComponent,
     VagaFormComponent,
-    TesteFormComponent,
-    VagaCardComponent
+    VagaCardComponent,
+    LoginFormComponent,
+    AlertaComponent
   ],
   imports: [
   AppRoutingModule,
@@ -113,9 +110,6 @@ registerLocaleData(localeBr, 'pt');
   ],
   providers: [
     VagaService,
-    TesteService,
-    QuestaoService,
-    RespostaService,
     DatePipe,
     { provide: LOCALE_ID, useValue: 'pt' }
   ],

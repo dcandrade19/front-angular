@@ -3,7 +3,7 @@ import { Deserializable } from './Deserializable';
 
 
 export class Vaga implements Deserializable {
-  public id: number;
+  public idVaga: number;
   public nome: string;
   public empresa: string;
   public descricao: string;
@@ -16,7 +16,7 @@ export class Vaga implements Deserializable {
   deserialize(input: any): this {
 
     Object.assign(this, input);
-    if (this.testes) {
+    if (this.testes.length) {
       this.testes = input.testes.map(teste => new Teste().deserialize(teste));
     }
     return this;

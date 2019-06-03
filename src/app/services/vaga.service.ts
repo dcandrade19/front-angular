@@ -33,11 +33,11 @@ export class VagaService {
     const headers = new HttpHeaders()
       .set('Content-Type', 'application/json');
     const nVaga = new Vaga().deserialize(vaga);
-    if (nVaga.id > 0) {
-      return this.http.put(`http://localhost:3002/vagas/${nVaga.id}`, nVaga, { headers }).pipe(
+    if (nVaga.idVaga > 0) {
+      return this.http.put(`http://localhost:3002/vagas/${nVaga.idVaga}`, nVaga, { headers }).pipe(
         map(data => new Vaga().deserialize(data)),
         tap((data) => {
-          this.refresh.next(data.id);
+          this.refresh.next(data.idVaga);
         }),
         catchError(() => throwError('Erro ao atualizar'))
 
@@ -46,7 +46,7 @@ export class VagaService {
       return this.http.post('http://localhost:3002/vagas', nVaga, { headers }).pipe(
         map(data => new Vaga().deserialize(data)),
         tap((data) => {
-          this.refresh.next(data.id);
+          this.refresh.next(data.idVaga);
         }),
         catchError(() => throwError('Erro ao salvar'))
       );

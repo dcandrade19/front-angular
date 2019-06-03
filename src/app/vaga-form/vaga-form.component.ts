@@ -1,10 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormArray } from '@angular/forms';
 import { VagaService } from '../services/vaga.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Vaga } from '../models/Vaga';
-import { Teste } from '../models/Teste';
-import { Observable } from 'rxjs';
+import { AlertasService } from '../services/alertas.service';
 
 @Component({
   selector: 'app-vaga-form',
@@ -19,13 +18,14 @@ export class VagaFormComponent implements OnInit {
   constructor(
     private vagaService: VagaService,
     private router: ActivatedRoute,
+    private alertasService: AlertasService
   ) {
 
   }
 
   ngOnInit() {
     this.vagas = new FormGroup({
-      id: new FormControl({ value: '', disabled: 'true' }),
+      idVaga: new FormControl({ value: '', disabled: 'true' }),
       nome: new FormControl(''),
       empresa: new FormControl(''),
       descricao: new FormControl(''),
@@ -42,29 +42,30 @@ export class VagaFormComponent implements OnInit {
       if (params.get('id')) {
         this.vagaService.buscar(params.get('id')).subscribe(vaga => {
 
-          let testes = this.getTestes(this.vagas);
-          let questoesForm = [];
-          let questoes = [];
+          const testes = this.getTestes(this.vagas);
+          const questoesForm = [];
+          const questoes = [];
 
           while (testes.length < vaga.testes.length) {
-            testes.push(this.initTestes())
+            testes.push(this.initTestes());
           }
 
           testes.forEach(teste => {
-            questoesForm.push(this.getQuestoes(teste))
-          })
+            questoesForm.push(this.getQuestoes(teste));
+          });
 
           vaga.testes.forEach(teste => {
-            questoes.push(teste.questoes)
-          })
+            questoes.push(teste.questoes);
+          });
 
-          for(let i =0; i < questoes.length; i++) {
+          for (let i = 0; i < questoes.length; i++) {
             while (questoesForm[i].length < questoes[i].length) {
-              questoesForm[i].push(this.initQuestoes())
+              questoesForm[i].push(this.initQuestoes());
             }
           }
 
-          this.vagas.patchValue(vaga)
+          this.vagas.patchValue(vaga);
+          this.alertasService.success('Editando vaga!', vaga.nome);
         });
       }
 
@@ -74,7 +75,7 @@ export class VagaFormComponent implements OnInit {
 
   initTestes() {
     return new FormGroup({
-      id: new FormControl({ value: '', disabled: 'true' }),
+      idTeste: new FormControl({ value: '', disabled: 'true' }),
       titulo: new FormControl(''),
       questoes: new FormArray([
         this.initQuestoes()
@@ -83,21 +84,21 @@ export class VagaFormComponent implements OnInit {
   }
   initQuestoes() {
     return new FormGroup({
-      id: new FormControl({ value: '', disabled: 'true' }),
+      idQuestao: new FormControl({ value: '', disabled: 'true' }),
       descricao: new FormControl(''),
       respostas: new FormArray([
         this.initRespostas(),
         this.initRespostas(),
         this.initRespostas(),
         this.initRespostas(),
-        this.initRespostas(),
+        this.initRespostas()
       ])
     });
   }
 
   initRespostas() {
     return new FormGroup({
-      id: new FormControl({ value: '', disabled: 'true' }),
+      idResposta: new FormControl({ value: '', disabled: 'true' }),
       descricao: new FormControl(''),
       certa: new FormControl('')
     });
@@ -106,6 +107,7 @@ export class VagaFormComponent implements OnInit {
   addTeste() {
     const control = this.vagas.get('testes') as FormArray;
     control.push(this.initTestes());
+    this.alertasService.success('Teste adicionado!');
   }
 
   addQuestao(j) {
@@ -113,7 +115,7 @@ export class VagaFormComponent implements OnInit {
     const control = this.vagas.get('testes')['controls'][j].get('questoes') as FormArray;
 
     control.push(this.initQuestoes());
-
+    this.alertasService.success('Questão adicionada!');
   }
 
   add(i, j) {
@@ -121,6 +123,7 @@ export class VagaFormComponent implements OnInit {
     const control = this.vagas.get('testes')['controls'][i].get('questoes').controls[j].get('respostas') as FormArray;
 
     control.push(this.initRespostas());
+
   }
 
   getTestes(form) {
@@ -136,12 +139,13 @@ export class VagaFormComponent implements OnInit {
   removerQuestoes(j) {
     const control = this.vagas.get('testes')['controls'][j].get('questoes') as FormArray;
     control.removeAt(j);
+    this.alertasService.error('Questão removida!');
   }
 
   removerTestes(i) {
     const control = this.vagas.get('testes') as FormArray;
     control.removeAt(i);
-
+    this.alertasService.error('Teste removido!');
   }
 
   removerResposta(i, j, k) {
@@ -158,12 +162,16 @@ export class VagaFormComponent implements OnInit {
 
   salvarVaga() {
     this.vagas.controls.data.setValue(new Date());
-    this.vagaService.salvar(this.vagas.getRawValue()).subscribe();
+    this.vagaService.salvar(this.vagas.getRawValue()).subscribe(data => {
+      this.alertasService.success('Vaga salva!', data.nome);
+    }, error => {
+      this.alertasService.error(error);
+    });
   }
 
   scrollToElement($element): void {
     console.log($element);
-    $element.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
+    $element.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
   }
 
   print(teste: any) {

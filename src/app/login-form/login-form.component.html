@@ -1,0 +1,43 @@
+<div class="login-form">
+  <h1 class="component-title">Login</h1>
+  <form [formGroup]="usuario" (ngSubmit)="logar()">
+    <mat-card class="card">
+      <div class="example-container">
+        <div flLayout="column" fxLayoutGap="7px" fxLayoutGap.xs="0px">
+          <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="1%" fxLayoutGap.sm="0px">
+            <mat-form-field fxFlex="100%">
+              <input matInput placeholder="Login" formControlName="nome" type="text">
+            </mat-form-field>
+          </div>
+          <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="1%" fxLayoutGap.sm="0px">
+            <mat-form-field fxFlex="100%">
+              <input matInput placeholder="Senha" formControlName="senha" [type]="hide ? 'password' : 'text'">
+              <a mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </a>
+            </mat-form-field>
+          </div>
+          <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="1%" fxLayoutGap.sm="0px">
+            <mat-form-field fxFlex="100%">
+              <mat-select placeholder="Tipo" formControlName="tipo">
+                <mat-option value="0">Candidato</mat-option>
+                <mat-option value="1">Empresa</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <mat-toolbar>
+        <a mat-button (click)="salvarUsuario()">
+          Criar conta
+        </a>
+        <span class="blank-space"></span>
+        <button mat-raised-button type="submit">
+          Entrar
+        </button>
+      </mat-toolbar>
+    </mat-card>
+
+  </form>
+</div>

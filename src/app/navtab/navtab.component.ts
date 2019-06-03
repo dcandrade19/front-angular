@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { UsuarioService } from './../services/usuario.service';
+import { Component, OnInit, Input } from '@angular/core';
+import { Usuario } from '../models/Usuario';
+import { Router } from '@angular/router';
+import { AlertasService } from '../services/alertas.service';
 
 @Component({
   selector: 'app-navtab',
@@ -7,11 +11,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavtabComponent implements OnInit {
 
-  opened: boolean = true;
+  opened = true;
+  @Input() usuarioLogado: Usuario;
 
-  constructor() { }
+
+  constructor(
+    private usuarioService: UsuarioService,
+    private router: Router,
+    private alertasService: AlertasService
+  ) { }
 
   ngOnInit() {
+  }
+
+  logout() {
+    this.usuarioService.logout();
+    this.router.navigate(['/login']);
+    this.alertasService.success('Usuario deslogado!');
   }
 
 }

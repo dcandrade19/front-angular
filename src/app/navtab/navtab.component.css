@@ -24,7 +24,18 @@ mat-nav-list a {
 mat-nav-list {
   padding-top: 0;
 }
+.btn-opc {
+  position: absolute;
+  left: 0;
+  top: -6px;
+  margin-left: 4px;
 
+}
+
+.btn-opc .mat-icon-button {
+  width: 0;
+  height: 0;
+}
 a.mat-list-item.active {
   background-color: #24AB4C;
   box-shadow: 0px 4px 4px -1px #000 inset;
@@ -33,18 +44,42 @@ a.mat-list-item.active {
 .example-fill-remaining-space {
   flex: 1 1 auto;
 }
+.candidato-image {
+  background-image: url(../../assets/candidato.jpg);
+  background-size: cover;
+}
+.empresa-image {
+  background-image: url(../../assets/empresa.jpg);
+  background-size: cover;
+}
 
 .titulo-div {
   background-image: url(../../assets/bg-titulo-2.jpg);
-  padding: 15px;
+  padding: 30px 25px 10px 25px;
   box-shadow: 0px 4px 4px -1px #000;
 }
-
-.titulo-div h1 {
+.mat-card-avatar {
+  border: 2px solid aliceblue;
+  box-shadow: 0px 4px 4px -1px #000;
+}
+.titulo-div mat-card-subtitle, .titulo-div mat-card-title {
   color: aliceblue;
   text-shadow: 2px 2px #000;
 }
-
+mat-card-subtitle {
+  font-size: 14px;
+}
+mat-card-title {
+  font-size: 24px;
+}
+.circulo {
+  widows: 100px;
+  height: 100px;
+  display: block;
+  background: aliceblue;
+  border: 4px solid #24AB4C;
+  border-radius: 50%;
+}
 .btn-open {
   cursor: pointer;
 }

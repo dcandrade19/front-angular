@@ -4,11 +4,11 @@
       <mat-icon>more_vert</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="editarVaga(vaga.id)">
+        <button mat-menu-item (click)="editarVaga(vaga.idVaga)">
             <mat-icon>edit</mat-icon>
             <span>Editar</span>
           </button>
-      <button mat-menu-item (click)="deletarVaga(vaga.id)">
+      <button mat-menu-item (click)="deletarVaga(vaga.idVaga)">
         <mat-icon>delete</mat-icon>
         <span>Deletar</span>
       </button>

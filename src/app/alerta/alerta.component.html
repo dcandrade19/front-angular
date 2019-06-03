@@ -1,0 +1,8 @@
+<div *ngIf="mensagem">
+  <mat-card (click)="limparMensagem()" [ngClass]="{ 'card mat-elevation-z6 slide-left': mensagem, 'card-sucess': mensagem.type === 'success', 'card-error': mensagem.type === 'error' }">
+      <mat-card-header>
+        <mat-card-title>{{mensagem.text}}</mat-card-title>
+        <mat-card-subtitle>{{mensagem.data ? mensagem.data : 'Aviso'}}</mat-card-subtitle>
+      </mat-card-header>
+</mat-card>
+</div>

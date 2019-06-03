@@ -1,0 +1,9 @@
+
+.login-form .card{
+  margin: 0 auto;
+  width: 26vw;
+}
+.blank-space {
+  flex: 1 1 auto;
+}
+
