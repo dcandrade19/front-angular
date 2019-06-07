@@ -3,27 +3,29 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError, Subject } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
 import { Vaga } from '../models/Vaga';
-
+import { environment } from '../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class VagaService {
 
   private refresh = new Subject<number>();
-
+  baseUrl = environment.baseUrl;
   get Refresh() {
     return this.refresh;
   }
   constructor(private http: HttpClient) { }
 
   public listar(): Observable<Vaga[]> {
-    return this.http.get<Vaga[]>('http://localhost:3002/vagas').pipe(
+    let url = this.baseUrl + '/vagas';
+    return this.http.get<Vaga[]>(url).pipe(
       map(data => data.map(vaga => new Vaga().deserialize(vaga)))
     );
   }
 
   public buscar(id: number | string): Observable<Vaga> {
-    return this.http.get<Vaga>(`http://localhost:3002/vagas/${id}`).pipe(
+    let url = this.baseUrl + `/vagas/${id}`;
+    return this.http.get<Vaga>(url).pipe(
       map(data => new Vaga().deserialize(data)),
       catchError(() => throwError('Vaga não localizada'))
     );
@@ -33,8 +35,9 @@ export class VagaService {
     const headers = new HttpHeaders()
       .set('Content-Type', 'application/json');
     const nVaga = new Vaga().deserialize(vaga);
+    let url = this.baseUrl + `/vagas/${nVaga.idVaga}`;
     if (nVaga.idVaga > 0) {
-      return this.http.put(`http://localhost:3002/vagas/${nVaga.idVaga}`, nVaga, { headers }).pipe(
+      return this.http.put(url, nVaga, { headers }).pipe(
         map(data => new Vaga().deserialize(data)),
         tap((data) => {
           this.refresh.next(data.idVaga);
@@ -43,7 +46,8 @@ export class VagaService {
 
       );
     } else {
-      return this.http.post('http://localhost:3002/vagas', nVaga, { headers }).pipe(
+      let url = this.baseUrl + '/vagas';
+      return this.http.post(url, nVaga, { headers }).pipe(
         map(data => new Vaga().deserialize(data)),
         tap((data) => {
           this.refresh.next(data.idVaga);
@@ -54,7 +58,8 @@ export class VagaService {
   }
 
   public deletar(id: number | string): Observable<any> {
-    return this.http.delete(`http://localhost:3002/vagas/${id}`).pipe(
+    let url = this.baseUrl + `/vagas/${id}`;
+    return this.http.delete(url).pipe(
       map(data => data),
       tap(() => {
         this.refresh.next();

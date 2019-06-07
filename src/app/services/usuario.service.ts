@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError, Subject, BehaviorSubject } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
 import { Usuario } from '../models/Usuario';
-
+import { environment } from '../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
@@ -12,7 +12,7 @@ export class UsuarioService {
   private refresh = new Subject<number>();
   private usuarioLogadoSubject: BehaviorSubject<Usuario>;
   public usuarioLogado: Observable<Usuario>;
-
+  baseUrl = environment.baseUrl;
   get Refresh() {
     return this.refresh;
   }
@@ -27,7 +27,8 @@ export class UsuarioService {
   public logar(usuario: Observable<Usuario>): Observable<Usuario> {
     const headers = new HttpHeaders()
       .set('Content-Type', 'application/json');
-    return this.http.post('http://localhost:3002/usuarios/logar', usuario, { headers }).pipe(
+      let url = this.baseUrl + '/usuarios/logar';
+    return this.http.post(url, usuario, { headers }).pipe(
       map(data => {
         const usuarioLogado = new Usuario().deserialize(data);
         if (usuarioLogado.idUsuario > 0) {
@@ -49,13 +50,15 @@ export class UsuarioService {
   }
 
   public listar(): Observable<Usuario[]> {
-    return this.http.get<Usuario[]>('http://localhost:3002/usuarios').pipe(
+    let url = this.baseUrl + '/usuarios';
+    return this.http.get<Usuario[]>(url).pipe(
       map(data => data.map(usuario => new Usuario().deserialize(usuario)))
     );
   }
 
   public buscar(id: number | string): Observable<Usuario> {
-    return this.http.get<Usuario>(`http://localhost:3002/usuarios/${id}`).pipe(
+    let url = this.baseUrl + `/usuarios/${id}`;
+    return this.http.get<Usuario>(url).pipe(
       map(data => new Usuario().deserialize(data)),
       catchError(() => throwError('Usuario não localizada'))
     );
@@ -64,9 +67,11 @@ export class UsuarioService {
   public salvar(usuario: Observable<Usuario>): Observable<Usuario> {
     const headers = new HttpHeaders()
       .set('Content-Type', 'application/json');
+
     const nUsuario = new Usuario().deserialize(usuario);
+    let url = this.baseUrl + `/usuarios/${nUsuario.idUsuario}`;
     if (nUsuario.idUsuario > 0) {
-      return this.http.put(`http://localhost:3002/usuarios/${nUsuario.idUsuario}`, nUsuario, { headers }).pipe(
+      return this.http.put(url, nUsuario, { headers }).pipe(
         map(data => new Usuario().deserialize(data)),
         tap((data) => {
           this.refresh.next(data.idUsuario);
@@ -75,7 +80,8 @@ export class UsuarioService {
 
       );
     } else {
-      return this.http.post('http://localhost:3002/usuarios', nUsuario, { headers }).pipe(
+      let url = this.baseUrl + '/usuarios';
+      return this.http.post(url, nUsuario, { headers }).pipe(
         map(data => new Usuario().deserialize(data)),
         tap((data) => {
           this.refresh.next(data.idUsuario);
@@ -86,7 +92,8 @@ export class UsuarioService {
   }
 
   public deletar(id: number | string): Observable<any> {
-    return this.http.delete(`http://localhost:3002/usuarios/${id}`).pipe(
+    let url = this.baseUrl + `/usuarios/${id}`;
+    return this.http.delete(url).pipe(
       map(data => data),
       tap(() => {
         this.refresh.next();
