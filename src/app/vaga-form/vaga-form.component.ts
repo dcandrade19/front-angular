@@ -25,7 +25,7 @@ export class VagaFormComponent implements OnInit {
 
   ngOnInit() {
     this.vagas = new FormGroup({
-      idVaga: new FormControl({ value: '', disabled: 'true' }),
+      idVaga: new FormControl({ value: 0, disabled: 'true' }),
       nome: new FormControl(''),
       empresa: new FormControl(''),
       descricao: new FormControl(''),
@@ -75,7 +75,7 @@ export class VagaFormComponent implements OnInit {
 
   initTestes() {
     return new FormGroup({
-      idTeste: new FormControl({ value: '', disabled: 'true' }),
+      idTeste: new FormControl({ value: 0, disabled: 'true' }),
       titulo: new FormControl(''),
       questoes: new FormArray([
         this.initQuestoes()
@@ -84,7 +84,7 @@ export class VagaFormComponent implements OnInit {
   }
   initQuestoes() {
     return new FormGroup({
-      idQuestao: new FormControl({ value: '', disabled: 'true' }),
+      idQuestao: new FormControl({ value: 0, disabled: 'true' }),
       descricao: new FormControl(''),
       respostas: new FormArray([
         this.initRespostas(),
@@ -98,7 +98,7 @@ export class VagaFormComponent implements OnInit {
 
   initRespostas() {
     return new FormGroup({
-      idResposta: new FormControl({ value: '', disabled: 'true' }),
+      idResposta: new FormControl({ value: 0, disabled: 'true' }),
       descricao: new FormControl(''),
       certa: new FormControl('')
     });
