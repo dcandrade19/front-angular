@@ -3,7 +3,7 @@ import { Deserializable } from './Deserializable';
 
 
 export class Vaga implements Deserializable {
-  public idVaga: number;
+  public idVaga = 0;
   public nome: string;
   public empresa: string;
   public descricao: string;

@@ -1,7 +1,7 @@
 import { Deserializable } from './Deserializable';
 
 export class Resposta implements Deserializable{
-  public idResposta: number;
+  public idResposta = 0;
   public descricao: string;
   public certa: boolean;
 

@@ -3,7 +3,7 @@ import { Resultado } from './Resultado';
 
 export class Usuario implements Deserializable {
 
-  public idUsuario: number;
+  public idUsuario = 0;
   public nome: string;
   public senha: string;
   public tipo: number;

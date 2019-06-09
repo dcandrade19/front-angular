@@ -3,7 +3,7 @@ import { Deserializable } from './Deserializable';
 import { Resultado } from './Resultado';
 
 export class Teste implements Deserializable {
-  public idTeste: number;
+  public idTeste = 0;
   public titulo: string;
   public questoes: Questao[] = [];
   public resultados: Resultado[] = [];

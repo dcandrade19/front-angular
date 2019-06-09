@@ -4,7 +4,7 @@ import { Deserializable } from './Deserializable';
 
 export class Resultado implements Deserializable {
 
-  public idResultado: number;
+  public idResultado = 0;
   public usuario: Usuario;
   public teste: Teste;
   public nota: number;
