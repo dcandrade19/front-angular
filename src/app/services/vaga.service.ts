@@ -17,14 +17,14 @@ export class VagaService {
   constructor(private http: HttpClient) { }
 
   public listar(): Observable<Vaga[]> {
-    let url = this.baseUrl + '/vagas';
+    const url = this.baseUrl + '/vagas';
     return this.http.get<Vaga[]>(url).pipe(
       map(data => data.map(vaga => new Vaga().deserialize(vaga)))
     );
   }
 
   public buscar(id: number | string): Observable<Vaga> {
-    let url = this.baseUrl + `/vagas/${id}`;
+    const url = this.baseUrl + `/vagas/${id}`;
     return this.http.get<Vaga>(url).pipe(
       map(data => new Vaga().deserialize(data)),
       catchError(() => throwError('Vaga não localizada'))
@@ -35,8 +35,9 @@ export class VagaService {
     const headers = new HttpHeaders()
       .set('Content-Type', 'application/json');
     const nVaga = new Vaga().deserialize(vaga);
-    let url = this.baseUrl + `/vagas/${nVaga.idVaga}`;
+    let url;
     if (nVaga.idVaga > 0) {
+      url = this.baseUrl + `/vagas/${nVaga.idVaga}`;
       return this.http.put(url, nVaga, { headers }).pipe(
         map(data => new Vaga().deserialize(data)),
         tap((data) => {
@@ -46,7 +47,7 @@ export class VagaService {
 
       );
     } else {
-      let url = this.baseUrl + '/vagas';
+      url = this.baseUrl + '/vagas';
       return this.http.post(url, nVaga, { headers }).pipe(
         map(data => new Vaga().deserialize(data)),
         tap((data) => {
@@ -58,7 +59,7 @@ export class VagaService {
   }
 
   public deletar(id: number | string): Observable<any> {
-    let url = this.baseUrl + `/vagas/${id}`;
+    const url = this.baseUrl + `/vagas/${id}`;
     return this.http.delete(url).pipe(
       map(data => data),
       tap(() => {

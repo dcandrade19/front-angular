@@ -24,10 +24,10 @@ export class UsuarioService {
     return this.usuarioLogadoSubject.value;
   }
 
-  public logar(usuario: Observable<Usuario>): Observable<Usuario> {
+  public logar(usuario: Usuario): Observable<Usuario> {
     const headers = new HttpHeaders()
       .set('Content-Type', 'application/json');
-      let url = this.baseUrl + '/usuarios/logar';
+    const url = this.baseUrl + '/usuarios/login';
     return this.http.post(url, usuario, { headers }).pipe(
       map(data => {
         const usuarioLogado = new Usuario().deserialize(data);
@@ -36,9 +36,6 @@ export class UsuarioService {
           this.usuarioLogadoSubject.next(usuarioLogado);
         }
         return usuarioLogado;
-      }),
-      tap((data) => {
-        this.refresh.next(data.idUsuario);
       }),
       catchError(() => throwError('Erro ao logar'))
     );
@@ -50,14 +47,14 @@ export class UsuarioService {
   }
 
   public listar(): Observable<Usuario[]> {
-    let url = this.baseUrl + '/usuarios';
+    const url = this.baseUrl + '/usuarios';
     return this.http.get<Usuario[]>(url).pipe(
       map(data => data.map(usuario => new Usuario().deserialize(usuario)))
     );
   }
 
   public buscar(id: number | string): Observable<Usuario> {
-    let url = this.baseUrl + `/usuarios/${id}`;
+    const url = this.baseUrl + `/usuarios/${id}`;
     return this.http.get<Usuario>(url).pipe(
       map(data => new Usuario().deserialize(data)),
       catchError(() => throwError('Usuario não localizada'))
@@ -69,8 +66,8 @@ export class UsuarioService {
       .set('Content-Type', 'application/json');
 
     const nUsuario = new Usuario().deserialize(usuario);
-    let url = this.baseUrl + `/usuarios/${nUsuario.idUsuario}`;
     if (nUsuario.idUsuario > 0) {
+      const url = this.baseUrl + `/usuarios/${nUsuario.idUsuario}`;
       return this.http.put(url, nUsuario, { headers }).pipe(
         map(data => new Usuario().deserialize(data)),
         tap((data) => {
@@ -80,7 +77,7 @@ export class UsuarioService {
 
       );
     } else {
-      let url = this.baseUrl + '/usuarios';
+      const url = this.baseUrl + '/usuarios';
       return this.http.post(url, nUsuario, { headers }).pipe(
         map(data => new Usuario().deserialize(data)),
         tap((data) => {
@@ -92,7 +89,7 @@ export class UsuarioService {
   }
 
   public deletar(id: number | string): Observable<any> {
-    let url = this.baseUrl + `/usuarios/${id}`;
+    const url = this.baseUrl + `/usuarios/${id}`;
     return this.http.delete(url).pipe(
       map(data => data),
       tap(() => {
