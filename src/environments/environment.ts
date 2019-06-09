@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'http://localhost:3002'
+  baseUrl: 'ec2-18-188-47-28.us-east-2.compute.amazonaws.com:3002'
 };
 
 /*
