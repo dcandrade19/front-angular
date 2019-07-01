@@ -23,6 +23,13 @@ export class VagaService {
     );
   }
 
+  public listarPorEmpresa(idEmpresa: number | string): Observable<Vaga[]> {
+    const url = this.baseUrl + `/vagas/empresa/${idEmpresa}`;
+    return this.http.get<Vaga[]>(url).pipe(
+      map(data => data.map(vaga => new Vaga().deserialize(vaga)))
+    );
+  }
+
   public buscar(id: number | string): Observable<Vaga> {
     const url = this.baseUrl + `/vagas/${id}`;
     return this.http.get<Vaga>(url).pipe(

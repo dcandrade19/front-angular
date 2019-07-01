@@ -20,7 +20,7 @@ body {
 }
 
 app-alerta {
-  position: absolute;
+  position: fixed;
   z-index: 100;
   width: auto;
   top: 0;

@@ -1,6 +1,9 @@
-import { UsuarioService } from './services/usuario.service';
+import { Candidato } from './models/Candidato';
+import { EmpresaService } from './services/empresa.service';
+import { CandidatoService } from './services/candidato.service';
 import { Component } from '@angular/core';
 import { Usuario } from './models/Usuario';
+import { Empresa } from './models/Empresa';
 
 @Component({
   selector: 'app-root',
@@ -9,12 +12,14 @@ import { Usuario } from './models/Usuario';
 })
 export class AppComponent {
   title = 'projeto-vaga';
-  usuarioLogado: Usuario;
-
+  candidatoLogado: Candidato;
+  empresaLogado: Empresa;
     constructor(
-        private usuarioService: UsuarioService
+        private candidatoService: CandidatoService,
+        private empresaService: EmpresaService
     ) {
-        this.usuarioService.usuarioLogado.subscribe(x => this.usuarioLogado = x);
+        this.candidatoService.candidatoLogado.subscribe(x => this.candidatoLogado = x);
+        this.empresaService.empresaLogado.subscribe(x => this.empresaLogado = x);
     }
 
 }

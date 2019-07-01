@@ -1,3 +1,5 @@
+import { EmpresaService } from './../services/empresa.service';
+import { Empresa } from './../models/Empresa';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormArray } from '@angular/forms';
 import { VagaService } from '../services/vaga.service';
@@ -14,20 +16,24 @@ export class VagaFormComponent implements OnInit {
 
   vagas: FormGroup;
   vaga: Vaga = new Vaga();
+  empresaLogado: Empresa;
 
   constructor(
     private vagaService: VagaService,
     private router: ActivatedRoute,
-    private alertasService: AlertasService
+    private alertasService: AlertasService,
+    private empresaService: EmpresaService
   ) {
-
+    this.empresaService.empresaLogado.subscribe(x => this.empresaLogado = x);
   }
 
   ngOnInit() {
+    const empresaVal = new Empresa().deserialize(this.empresaLogado);
+    empresaVal.vagas = [];
     this.vagas = new FormGroup({
       idVaga: new FormControl({ value: 0, disabled: 'true' }),
       nome: new FormControl(''),
-      empresa: new FormControl(''),
+      empresa: new FormControl({ value: empresaVal, disabled: 'true' }),
       descricao: new FormControl(''),
       cidade: new FormControl(''),
       estado: new FormControl(''),
@@ -46,6 +52,7 @@ export class VagaFormComponent implements OnInit {
           const questoesForm = [];
           const questoes = [];
 
+
           while (testes.length < vaga.testes.length) {
             testes.push(this.initTestes());
           }
@@ -63,7 +70,10 @@ export class VagaFormComponent implements OnInit {
               questoesForm[i].push(this.initQuestoes());
             }
           }
-
+          const empresaVal = new Empresa().deserialize(this.empresaLogado);
+          empresaVal.vagas = [];
+          vaga.empresa = empresaVal;
+          console.log(JSON.stringify(vaga));
           this.vagas.patchValue(vaga);
           this.alertasService.success('Editando vaga!', vaga.nome);
         });

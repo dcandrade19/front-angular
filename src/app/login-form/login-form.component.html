@@ -1,6 +1,16 @@
 <div class="login-form">
   <h1 class="component-title">Login</h1>
-  <form [formGroup]="usuario" (ngSubmit)="logar()">
+  <mat-card class="card" style="margin-bottom: 10px">
+  <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="1%" fxLayoutGap.sm="0px">
+      <mat-form-field fxFlex="100%">
+        <mat-select placeholder="Tipo" [(ngModel)]="tipo">
+          <mat-option value="Candidato">Candidato</mat-option>
+          <mat-option value="Empresa">Empresa</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </mat-card>
+  <form [formGroup]="usuario" (ngSubmit)="logar()" *ngIf="tipo">
     <mat-card class="card">
       <div class="example-container">
         <div flLayout="column" fxLayoutGap="7px" fxLayoutGap.xs="0px">
@@ -19,11 +29,8 @@
             </mat-form-field>
           </div>
           <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="1%" fxLayoutGap.sm="0px">
-            <mat-form-field fxFlex="100%">
-              <mat-select placeholder="Tipo" formControlName="tipo">
-                <mat-option value="0">Candidato</mat-option>
-                <mat-option value="1">Empresa</mat-option>
-              </mat-select>
+            <mat-form-field fxFlex="100%" *ngIf="tipo == 'Empresa'">
+              <input matInput placeholder="Razão Social" formControlName="razaoSocial" type="text">
             </mat-form-field>
           </div>
         </div>

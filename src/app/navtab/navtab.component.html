@@ -1,6 +1,6 @@
 <div>
   <mat-sidenav-container class="sidebar-container">
-    <mat-sidenav mode="side" *ngIf="usuarioLogado" [opened]="opened" fixedInViewport="Fixed">
+    <mat-sidenav mode="side" *ngIf="candidatoLogado || empresaLogado" [opened]="opened" fixedInViewport="Fixed">
       <mat-nav-list>
           <mat-card  class="titulo-div">
               <div class="btn-opc">
@@ -13,22 +13,27 @@
                     </a>
                   </mat-menu>
                 </div>
-            <mat-card-header>
-              <div mat-card-avatar [ngClass]="usuarioLogado.tipo == 0 ? 'candidato-image' : 'empresa-image'"></div>
-              <mat-card-title>{{usuarioLogado.nome}}</mat-card-title>
-              <mat-card-subtitle>{{usuarioLogado.tipo == 0 ? 'Candidato' : 'Empresa'}}</mat-card-subtitle>
+            <mat-card-header *ngIf="candidatoLogado">
+              <div mat-card-avatar class="candidato-image"></div>
+              <mat-card-title>{{candidatoLogado.nome}}</mat-card-title>
+              <mat-card-subtitle>Candidato</mat-card-subtitle>
             </mat-card-header>
+            <mat-card-header *ngIf="empresaLogado">
+                <div mat-card-avatar class="empresa-image"></div>
+                <mat-card-title>{{empresaLogado.razaoSocial}}</mat-card-title>
+                <mat-card-subtitle>Empresa</mat-card-subtitle>
+              </mat-card-header>
           </mat-card>
         <a mat-list-item routerLink="/vagas" routerLinkActive="active">
           <mat-icon>list</mat-icon> Vagas
         </a>
-        <a mat-list-item routerLink="/nova" routerLinkActive="active">
+        <a mat-list-item routerLink="/nova" routerLinkActive="active" *ngIf="empresaLogado">
           <mat-icon>add</mat-icon> Adicionar Vaga
         </a>
       </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
-      <mat-icon *ngIf="usuarioLogado" class="btn-open" (click)="opened = !opened">{{opened ? 'arrow_back_ios' : 'arrow_forward_ios'}}
+      <mat-icon *ngIf="empresaLogado || candidatoLogado" class="btn-open" (click)="opened = !opened">{{opened ? 'arrow_back_ios' : 'arrow_forward_ios'}}
       </mat-icon>
       <app-alerta></app-alerta>
       <router-outlet></router-outlet>

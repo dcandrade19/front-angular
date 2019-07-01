@@ -1,11 +1,12 @@
 import { Teste } from './Teste';
 import { Deserializable } from './Deserializable';
+import { Empresa } from './Empresa';
 
 
 export class Vaga implements Deserializable {
   public idVaga = 0;
   public nome: string;
-  public empresa: string;
+  public empresa: Empresa;
   public descricao: string;
   public cidade: string;
   public estado: string;
